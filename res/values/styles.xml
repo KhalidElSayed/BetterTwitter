@@ -17,4 +17,11 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="TwitterLikeTheme" parent="@style/AppTheme">
+        <item name="android:actionBarStyle">@style/TwitterLikeActionBar</item>
+    </style>
+
+    <style name="TwitterLikeActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#55aeed</item>
+    </style>
 </resources>

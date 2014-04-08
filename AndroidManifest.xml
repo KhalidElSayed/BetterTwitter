@@ -16,7 +16,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/TwitterLikeTheme" >
         <meta-data
             android:name="AA_DB_NAME"
             android:value="BetterTwitter.db" />
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name="com.inez.bettertwitter.activities.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="" >
         </activity>
     </application>
 

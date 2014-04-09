@@ -46,6 +46,7 @@
         </activity>
         <activity
             android:name="com.inez.bettertwitter.activities.MainActivity"
+            android:icon="@drawable/ic_launcher_inversed"
             android:label="" >
         </activity>
         <activity
@@ -56,6 +57,7 @@
         </activity>
         <activity
             android:name="com.inez.bettertwitter.activities.ProfileActivity"
+            android:icon="@drawable/ic_launcher_inversed"
             android:label="@string/title_activity_profile" >
         </activity>
     </application>

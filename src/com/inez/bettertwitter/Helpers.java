@@ -26,6 +26,8 @@ public class Helpers {
 		relativeTime = relativeTime.replace(" hour ago", "h");
 		relativeTime = relativeTime.replace(" day ago", "d");
 		relativeTime = relativeTime.replace(" week ago", "w");
+		relativeTime = relativeTime.replace("moments ago", "just now");
+		relativeTime = relativeTime.replace("moments from now", "just now");
 		return relativeTime;
 	}
 	

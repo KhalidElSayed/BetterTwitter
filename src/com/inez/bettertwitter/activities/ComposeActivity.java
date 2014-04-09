@@ -19,6 +19,7 @@ import com.inez.bettertwitter.Ids;
 import com.inez.bettertwitter.R;
 import com.inez.bettertwitter.TwitterClient;
 import com.inez.bettertwitter.models.Tweet;
+import com.inez.bettertwitter.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class ComposeActivity extends Activity {
@@ -27,11 +28,15 @@ public class ComposeActivity extends Activity {
 	private MenuItem mi_remaining;
 	private EditText et_tweet;
 	private AsyncCalculating runner;
-
+	private Tweet tweet;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compose);
+		
+		Intent i = getIntent();
+		tweet = (Tweet) i.getSerializableExtra(Ids.TWEET_KEY);
 
 		et_tweet = (EditText) findViewById(R.id.et_tweet);
 		et_tweet.addTextChangedListener(new TextWatcher() {
@@ -62,6 +67,12 @@ public class ComposeActivity extends Activity {
 				}
 			}
 		});
+		
+		if ( tweet != null ) {
+			et_tweet.setText("@" + tweet.getUser().getScreenName() + " ");
+			et_tweet.setSelection(et_tweet.length());
+		}
+
 	}
 
 	@Override
@@ -80,7 +91,7 @@ public class ComposeActivity extends Activity {
 	public void onTweetClick(MenuItem menuItem) {
 		final ProgressDialog progressDialog = ProgressDialog.show(this, "", "Please wait...", true);
 		TwitterClient client = BetterTwitterClientApp.getRestClient();
-		client.postUpdate(et_tweet.getText().toString(), 0, new JsonHttpResponseHandler() {
+		client.postUpdate(et_tweet.getText().toString(), tweet != null ? tweet.getRemoteId() : 0, new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject jsonTweet) {
 				progressDialog.dismiss();

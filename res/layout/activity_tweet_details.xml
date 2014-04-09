@@ -40,7 +40,7 @@
 	    android:layout_marginTop="10dp"
 	    android:layout_marginRight="10dp"
 	    android:text="tv_body"
-	    android:textAppearance="?android:attr/textAppearanceMedium" />
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	<TextView
 	    android:id="@+id/tv_time"
@@ -58,4 +58,27 @@
 	    android:layout_centerHorizontal="true"
 	    android:layout_marginTop="20dp" />
 
+	<View
+	    android:id="@+id/separator_1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/iv_medium"
+        android:layout_marginTop="5dp"
+        android:background="#dfe6eb" />
+
+	<ImageView
+	    android:id="@+id/iv_reply"
+	    android:onClick="onReplyClick"
+	    android:layout_centerHorizontal="true"
+        android:layout_below="@+id/separator_1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/ic_reply" />
+
+	<View
+	    android:id="@+id/separator_2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/iv_reply"
+        android:background="#dfe6eb" />		
 </RelativeLayout>

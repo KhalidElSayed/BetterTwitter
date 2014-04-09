@@ -9,21 +9,25 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.inez.bettertwitter.Helpers;
 import com.inez.bettertwitter.Ids;
 import com.inez.bettertwitter.R;
+import com.inez.bettertwitter.fragments.TimelineFragment;
 import com.inez.bettertwitter.models.Tweet;
 import com.inez.bettertwitter.models.User;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TweetDetailsActivity extends Activity {
 
+	private Tweet tweet;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tweet_details);
 
 		Intent i = getIntent();
-		Tweet tweet = (Tweet) i.getSerializableExtra(Ids.TWEET_KEY);
+		tweet = (Tweet) i.getSerializableExtra(Ids.TWEET_KEY);
 		User user = tweet.getUser();
 
 		ImageView iv_profile = (ImageView) findViewById(R.id.iv_profile);
@@ -53,6 +57,23 @@ public class TweetDetailsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.tweet_details, menu);
 		return true;
+	}
+	
+	public void onReplyClick(View v) {
+		Intent i = new Intent(this, ComposeActivity.class);
+		i.putExtra(Ids.TWEET_KEY, tweet);
+		startActivityForResult(i, Ids.COMPOSE_REQUEST);
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == Ids.COMPOSE_REQUEST) {
+			if (resultCode == RESULT_OK) {
+				Tweet tweet = (Tweet) data.getSerializableExtra(Ids.TWEET_KEY);
+				Intent i = new Intent(this, MainActivity.class);
+				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(i);
+			}
+		}
 	}
 
 }

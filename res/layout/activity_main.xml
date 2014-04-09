@@ -57,6 +57,7 @@
         android:id="@+id/vp_pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_marginBottom="44dp"
         android:layout_marginTop="49dp" >
     </android.support.v4.view.ViewPager>
 
@@ -68,7 +69,8 @@
         android:background="#dfe6eb" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:onClick="onComposeClick"
+        android:clickable="true"
 		android:focusable="false"
         android:hint="What's up..."
         android:layout_width="fill_parent"

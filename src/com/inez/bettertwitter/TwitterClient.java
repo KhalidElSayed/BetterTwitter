@@ -1,5 +1,7 @@
 package com.inez.bettertwitter;
 
+import java.io.ByteArrayInputStream;
+
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -31,9 +33,21 @@ public class TwitterClient extends OAuthBaseClient {
     public TwitterClient(Context context) {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
+    
+    public void getMyInfo(AsyncHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("account/verify_credentials.json");
+    	client.get(apiUrl, null, handler);
+    }
 
-    public void getHomeTimeline(AsyncHttpResponseHandler handler) {
-    	getHomeTimeline(0, handler);
+    public void getUserTimeline(long user_id, long max_id, AsyncHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("statuses/user_timeline.json");
+    	RequestParams params = new RequestParams();
+    	if ( max_id != 0 ) {
+    		params.put("max_id", String.valueOf(max_id));
+    	}
+    	params.put("user_id", String.valueOf(user_id));
+		params.put("count", "25");
+    	client.get(apiUrl, params, handler);
     }
 
     public void getHomeTimeline(long max_id, AsyncHttpResponseHandler handler) {
@@ -45,10 +59,7 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("count", "25");
     	client.get(apiUrl, params, handler);
     }
-    
-    public void getMentionsTimeline(AsyncHttpResponseHandler handler) {
-    	getMentionsTimeline(0, handler);
-    }    
+
     public void getMentionsTimeline(long max_id, AsyncHttpResponseHandler handler) {
     	String apiUrl = getApiUrl("statuses/mentions_timeline.json");
         RequestParams params = new RequestParams();
@@ -59,4 +70,14 @@ public class TwitterClient extends OAuthBaseClient {
     	client.get(apiUrl, params, handler);
     }
 
+    public void postUpdate(String status, long inReplyToStatusId, AsyncHttpResponseHandler handler) {
+    	String apiUrl = getApiUrl("statuses/update.json");
+    	RequestParams params = new RequestParams();
+    	params.put("status", status);
+    	if ( inReplyToStatusId != 0 ) {
+    		params.put("in_reply_to_status_id", String.valueOf(inReplyToStatusId));
+    	}
+    	client.post(apiUrl, params, handler);    		
+    }
+    
 }

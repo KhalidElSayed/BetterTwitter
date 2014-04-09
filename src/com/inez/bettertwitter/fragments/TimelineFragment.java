@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.inez.bettertwitter.BetterTwitterClientApp;
+import com.inez.bettertwitter.EndlessScrollListener;
 import com.inez.bettertwitter.FetchTimelineHandler;
 import com.inez.bettertwitter.R;
 import com.inez.bettertwitter.TweetsAdapter;
@@ -37,13 +38,27 @@ public abstract class TimelineFragment extends Fragment {
         adapter = new TweetsAdapter(getActivity(), tweets);
 		lv_tweets.setAdapter(adapter);
 		
+		lv_tweets.setOnScrollListener(new EndlessScrollListener() {
+
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				fetchTimelineAsync(adapter.getItem(totalItemsCount - 1).getRemoteId() - 1, new FetchTimelineHandler() {
+					@Override
+					public void onFetched(ArrayList<Tweet> tweets) {
+						adapter.addAll(tweets);
+					}
+				});
+			}
+			
+		});
+		
 		fetchTimelineAsync(0, new FetchTimelineHandler() {
 			@Override
 			public void onFetched(ArrayList<Tweet> tweets) {
 				adapter.addAll(tweets);
 			}
 		});
-
+		
 		return view;
     }
 	
@@ -56,6 +71,10 @@ public abstract class TimelineFragment extends Fragment {
 				handler.onFetched(Tweet.fromJson(jsonTweets));
 			}
 		});		
+	}
+	
+	public TweetsAdapter getAdapter() {
+		return adapter;
 	}
 
 }

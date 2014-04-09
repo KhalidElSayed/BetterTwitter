@@ -26,7 +26,7 @@
 
         <activity
             android:name="com.inez.bettertwitter.activities.LoginActivity"
-            android:label="@string/app_name"
+            android:label="BetterTwitter"
             android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,6 +47,16 @@
         <activity
             android:name="com.inez.bettertwitter.activities.MainActivity"
             android:label="" >
+        </activity>
+        <activity
+            android:name="com.inez.bettertwitter.activities.ComposeActivity"
+            android:label=""
+            android:theme="@style/ComposeTheme"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.inez.bettertwitter.activities.ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/mi_remaining"
+        android:showAsAction="always"
+         android:title="140"
+        android:enabled="false" />
+    <item android:id="@+id/mi_tweet"
+        android:onClick="onTweetClick"
+        android:showAsAction="always"
+        android:title="TWEET"
+        android:enabled="false" />
+</menu>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -23,5 +23,21 @@
 
     <style name="TwitterLikeActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#55aeed</item>
+        <item name="android:titleTextStyle">@style/TwitterLikeActionBarTitleText</item>
     </style>
+
+    <style name="TwitterLikeActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#ffffff</item>
+	</style>
+    
+    <style name="ComposeTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ComposeActionBar</item>
+    	<item name="android:textAllCaps">false</item>	
+   </style>
+
+    <style name="ComposeActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">#ffffff</item>
+        <item name="android:icon">@android:color/transparent</item>
+	</style>
+
 </resources>

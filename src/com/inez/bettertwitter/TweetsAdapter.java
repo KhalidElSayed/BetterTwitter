@@ -5,16 +5,17 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.inez.bettertwitter.activities.ProfileActivity;
+import com.inez.bettertwitter.activities.TweetDetailsActivity;
 import com.inez.bettertwitter.models.Tweet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -54,6 +55,18 @@ public class TweetsAdapter extends ArrayAdapter<Tweet> {
 	    
 	    TextView tv_time = (TextView) view.findViewById(R.id.tv_time);
 	    tv_time.setText(Html.fromHtml("<font color='#777777'>" + Helpers.getRelativeTime(tweet.getCreatedAt()) + "</font>"));
+	    
+	    RelativeLayout rl_details = (RelativeLayout) view.findViewById(R.id.rl_details);
+	    rl_details.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Context context = getContext();
+
+				Intent i = new Intent(context, TweetDetailsActivity.class);
+				i.putExtra(Ids.TWEET_KEY, tweet);
+				context.startActivity(i);
+			}
+		});
 	    
         return view;
 	}

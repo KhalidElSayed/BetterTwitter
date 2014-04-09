@@ -60,6 +60,11 @@
             android:icon="@drawable/ic_launcher_inversed"
             android:label="@string/title_activity_profile" >
         </activity>
+        <activity
+            android:name="com.inez.bettertwitter.activities.TweetDetailsActivity"
+            android:icon="@drawable/ic_launcher_inversed"
+            android:label="@string/title_activity_tweet_details" >
+        </activity>
     </application>
 
 </manifest>
